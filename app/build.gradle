@@ -11,6 +11,7 @@ android {
         versionCode VERSION_CODE as int
         versionName VERSION_NAME as String
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -19,9 +20,18 @@ android {
     }
 }
 
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':library')
     compile 'com.android.support:recyclerview-v7:24.2.0'
     compile 'com.android.support:appcompat-v7:24.2.0'
+    //非root手机调试布局的aar
+    debugCompile(name: 'viewserver-debug', ext: 'aar')
+    releaseCompile(name: 'viewserver-no-debug', ext: 'aar')
 }
